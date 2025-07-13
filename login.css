@@ -1,211 +1,116 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    margin: 0;
-    padding: 0;
-    overflow: hidden; 
-    min-height: 100vh; 
-
-    
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-
-    position: relative;
-    color: #333; 
-}
-
-
-.logo img{
-    width: 100px;
-    height: 100px;
-    border-radius: 30px;
-    
-    background-size: cover;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    filter: drop-shadow(0px 7px 21px #AD8C5E );
-    animation: rotar 5s linear infinite;
-}
-.logo:hover{
-    cursor: pointer;
-}
-
-@keyframes rotar{
-    from{
-        transform: rotateY(180deg);
-
-    }
-    to{
-        transform: rotateY(-180deg);
-    }
-}
-
-.img-background {
+.login-overlay {
     position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden; 
-    z-index: -1; 
-
+    background-color: rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.img-background img {
-    min-width: 100%; 
-    min-height: 100%; 
-    width: auto;     
-    height: auto;    
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    object-fit: cover; 
-
+    justify-content: flex-start; 
+    align-items: center;   
+    padding-left: 5%;
+    z-index: 999; 
     
-    filter: brightness(0.6) grayscale(30%); 
+    transition: opacity 0.5s ease-out; 
 }
 
 
 .login-container {
-    background-color: rgba(255, 255, 255, 0.05); 
-    backdrop-filter: blur(8px); 
-    -webkit-backdrop-filter: blur(8px); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px; 
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); 
-    padding: 25px 40px; 
-    width: 300px; 
-    max-width: 90%; 
-    text-align: center; 
-    color: white; 
-    position: relative; 
-    z-index: 1; 
-    animation: fadeIn 1s ease-out, floatAnimation 6s ease-in-out infinite;  
+    background-color: rgba(255, 255, 255, 0.15); 
+    border-radius: 15px;
+    padding: 30px 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 300px;
+    width: 70%;
+    top: 100px;
+    color: #fff; 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    backdrop-filter: blur(5px); 
 }
-
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-
 
 .login-container h2 {
-    font-size: 2.2em;
     margin-bottom: 25px;
-    color: white; 
-    font-weight: 700; 
+    font-size: 2.2em;
+    color: #fff; 
+    text-shadow: 0 0 5px rgba(0,0,0,0.5); 
+}
+.login-container .form-group {
+    margin-bottom: 20px;
+    text-align: left;
 }
 
-.form-group {
-    margin-bottom: 18px; 
-    text-align: left; 
-}
-
-.form-group label {
+.login-container label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 600; 
-    color: white; 
-    font-size: 1em;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    color: #eee;
 }
 
-.form-group input[type="email"] {
-    width: calc(100% - 24px); 
-    padding: 10px; 
-    border: 1px solid rgba(255, 255, 255, 0.4);
+.login-container input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.4); 
     border-radius: 8px;
-    font-size: 1em;
     background-color: rgba(255, 255, 255, 0.1); 
-    color: #ecf0f1;
-    outline: none;
-    transition: all 0.3s ease;
+    color: #fff; 
+    font-size: 1em;
+    outline: none; 
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.form-group input[type="email"]::placeholder {
-    color: rgba(236, 240, 241, 0.7); 
+.login-container input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.7); 
 }
 
-.form-group input[type="email"]:focus {
-    border-color: rgba(0, 123, 255, 0.7); 
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); 
-    background-color: rgba(255, 255, 255, 0.15); 
+.login-container input[type="text"]:focus {
+    border-color: #AD8C5E; 
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .login-container button[type="submit"] {
-    background: linear-gradient(to right, #007bff, #0056b3); 
-    border: none;
-    padding: 12px 25px; 
-    border-radius: 10px; 
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    width: 100%;
-    margin-top: 25px; 
-    transition: all 0.3s ease;
-    text-transform: uppercase; 
-    letter-spacing: 1px; 
-  }  
-.login-container button[type="submit"]:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4); 
-}
-
-.signup-link {
-    margin-top: 25px;
-    font-size: 1em;
-    color: #bdc3c7; 
-    line-height: 1.
-
-}
-
-
-.message {
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 0.8em;
     background-color: rgba(255, 255, 255, 0.1); 
-    backdrop-filter: blur(3px); 
-    -webkit-backdrop-filter: blur(3px);
-    border: 1px solid;
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
 }
 
-.message.error {
-    color: #e74c3c; 
-    border-color: rgba(231, 76, 60, 0.5);
+.login-container button[type="submit"]:hover {
+    background-color: #92754A; 
+    transform: translateY(-2px);
 }
 
-.message.success {
-    color: #27ae60; 
-    border-color: rgba(39, 174, 96, 0.5);
+.login-container .signup-link {
+    margin-top: 25px;
+    font-size: 0.9em;
+    color: #ccc;
 }
 
-
-.signup-link a {
-    color: #007bff; 
-    text-decoration: none;
+.login-container .message {
+    margin-top: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid; 
+    font-size: 0.95em;
     font-weight: bold;
-    transition: color 0.3s ease;
+    display: none; 
 }
 
-.signup-link a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+.login-container .message.success {
+    background-color: rgba(173, 140, 94, 0.2); 
+    color: #AD8C5E; 
+    border-color: #AD8C5E;
+    display: block; 
 }
 
+.login-container .message.error {
+    background-color: rgba(231, 76, 60, 0.2); 
+    color: #e74c3c; 
+    border-color: #e74c3c;
+    display: block; 
+}
