@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // loginOverlay.style.display = 'none';
                     }
                     // Opcional: Si en el futuro quieres redirigir a una página principal
-                    window.location.href = 'index.html'; 
+                    window.location.href = 'home.html'; 
                 }, 1000); // 1000 milisegundos = 1 segundo
             } else {
                 // Muestra un mensaje de error si el campo está vacío
