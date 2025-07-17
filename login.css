@@ -1,116 +1,246 @@
-.login-overlay {
-    position: fixed; 
+ 
+ *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+ 
+ body{
+    font-family: Poppins;
+    margin: 0;
+    font-size: 16px;
+    background-image: url('img/fondo1.jpg'); /* Ruta a tu imagen */
+   
+     display: flex;          /* Habilita Flexbox para el body */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center;    
+    min-height: 100vh;       /* ¡Asegura que el body ocupe toda la altura de la ventana! */
+    overflow: hidden;        /* Evita barras de desplazamiento innecesarias */
+
+    
+}
+/* --- CAMBIO EN HEADER --- */
+header {
+    /* Mantenemos position: absolute o fixed para que no ocupe espacio y no interfiera con el centrado del body */
+    position: absolute; /* O 'fixed' si quieres que siempre esté visible al hacer scroll */
+    top: 0;             /* Lo posiciona en la parte superior */
+    left: 0;            /* Lo posiciona en la parte izquierda */
+    min-height: 100px;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 10;
+    /* Ya no necesita 'position: relative' si lo queremos fuera del flujo */
+    /* Podrías incluso eliminar el <header> si solo el logo es relevante y posicionar el logo directamente */
+}
+
+
+
+
+
+
+.logo img{
+    /* Mantenemos lo que ya tienes, pero su 'position: fixed' es clave */
+    width: 100px;
+    height: 100px;
+    border-radius: 30px;
+    background-size: cover;
+    position: fixed; /* Esto es lo que lo saca del flujo y lo fija en la ventana */
+    top: 10px;
+    left: 10px;
+    filter: drop-shadow(0px 7px 21px #AD8C5E );
+    animation: rotar 5s linear infinite;
+    z-index: 100; /* Asegura que el logo esté por encima de todo */
+}
+
+
+.logo:hover{
+    cursor: pointer;
+}
+
+@keyframes rotar{
+    from{
+        transform: rotateY(180deg);
+
+    }
+    to{
+        transform: rotateY(-180deg);
+    }
+}
+/* --- CONTENEDOR DE LA IMAGEN DE FONDO --- */
+.img-background {
+    position: fixed; /* Se fija en la ventana */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+    z-index: -1; /* Envía la imagen al fondo, detrás de todo */
+
+    /* Para centrar la imagen dentro de su contenedor (si no es 100% exacto) */
     display: flex;
-    justify-content: flex-start; 
-    align-items: center;   
-    padding-left: 5%;
-    z-index: 999; 
-    
-    transition: opacity 0.5s ease-out; 
+    justify-content: center;
+    align-items: center;
 }
 
+.img-background img {
+    min-width: 100%; /* Asegura que la imagen cubra todo el ancho */
+    min-height: 100%; /* Asegura que la imagen cubra toda la altura */
+    width: auto;     /* Mantiene la proporción */
+    height: auto;    /* Mantiene la proporción */
+    position: absolute; /* Posiciona la imagen dentro de su contenedor */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centra la imagen */
+    object-fit: cover; /* Recorta la imagen para que cubra sin distorsionarse */
 
+    /* --- EFECTOS PARA LA IMAGEN DE FONDO --- */
+    filter: brightness(0.6) grayscale(30%); /* Oscurece y desatura un poco la imagen */
+}
+
+/* --- ESTILOS DEL CONTENEDOR DEL FORMULARIO DE LOGIN (flotante y centrado) --- */
 .login-container {
-    background-color: rgba(255, 255, 255, 0.15); 
-    border-radius: 15px;
-    padding: 30px 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 300px;
-    width: 70%;
-    top: 100px;
-    color: #fff; 
-    border: 1px solid rgba(255, 255, 255, 0.3); 
-    backdrop-filter: blur(5px); 
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo blanco muy transparente (20% opacidad) */
+    backdrop-filter: blur(8px); /* Aumenta el desenfoque para un efecto más notorio */
+    -webkit-backdrop-filter: blur(8px); /* Prefijo para Safari */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde blanco sutil para el efecto de "cristal" */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* Sombra más grande y oscura para flotar */
+    padding: 25px 40px; /* Generoso padding */
+    width: 300px; /* Ancho fijo y adecuado para el formulario */
+    max-width: 90%; /* Máximo 90% del ancho de la pantalla (responsivo) */
+    text-align: center; /* Centra el texto dentro del formulario */
+    color: white; /* Color de texto oscuro para contraste */
+    /* *** ELIMINAMOS 'position: absolute', 'top', 'right', 'transform' y 'margin-left: auto' de aquí *** */
+    /* *** Porque el centrado lo hará el 'body' con flexbox *** */
+    position: relative; /* Lo mantenemos para asegurar el z-index */
+    z-index: 1; /* Asegura que el formulario esté por encima del fondo */
+    animation: fadeIn 1s ease-out, floatAnimation 6s ease-in-out infinite; /* Combina la animación de entrada con la de flotación */
 }
+
+/* Animación de entrada para el formulario */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- ESTILOS DE LOS ELEMENTOS DENTRO DEL FORMULARIO --- */
 
 .login-container h2 {
+    font-size: 2em; /* Título más grande y prominente */
     margin-bottom: 25px;
-    font-size: 2.2em;
-    color: #fff; 
-    text-shadow: 0 0 5px rgba(0,0,0,0.5); 
-}
-.login-container .form-group {
-    margin-bottom: 20px;
-    text-align: left;
+    color: white; /* Color oscuro para el título */
+    font-weight: 700; /* Negrita */
 }
 
-.login-container label {
+.form-group {
+    margin-bottom: 18px; /* Espacio entre los campos */
+    text-align: left; /* Alinea el label a la izquierda */
+    border-radius: 15px;
+}
+
+.form-group label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 1.1em;
-    color: #eee;
-}
-
-.login-container input[type="text"] {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.4); 
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.1); 
-    color: #fff; 
+    margin-bottom: 5px;
+    border-radius: 15px;
+    font-weight: 600; /* Semi-negrita */
+    color: white; /* Un gris azulado */
     font-size: 1em;
-    outline: none; 
-    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.login-container input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.7); 
+.form-group input[type="email"] {
+    width: calc(100% - 24px); /* Ancho completo menos padding */
+    padding: 10px; /* Padding uniforme */
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Borde blanco semi-transparente */
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo del input muy transparente */
+    color: #ecf0f1; /* Texto del input claro */
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-.login-container input[type="text"]:focus {
-    border-color: #AD8C5E; 
-    background-color: rgba(255, 255, 255, 0.15);
+.form-group input[type="email"]::placeholder {
+    color: rgba(236, 240, 241, 0.7); /* Placeholder más claro */
+}
+
+.form-group input[type="email"]:focus {
+    border-color: rgba(0, 123, 255, 0.7); /* Borde azul al enfocar */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); /* Sombra de enfoque */
+    background-color: rgba(255, 255, 255, 0.15); /* Ligeramente más opaco al enfocar */
 }
 
 .login-container button[type="submit"] {
-    background-color: rgba(255, 255, 255, 0.1); 
-    color: #fff;
-    padding: 12px 30px;
+    background: linear-gradient(to right, #007bff, #0056b3); /* Gradiente para el botón */
+    color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1.1em;
+    padding: 12px 25px; /* Padding generoso */
+    border-radius: 10px; /* Bordes más redondeados */
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 15px;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 25px; /* Más espacio encima */
+    transition: all 0.3s ease;
+    text-transform: uppercase; /* Texto en mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
 }
 
 .login-container button[type="submit"]:hover {
-    background-color: #92754A; 
-    transform: translateY(-2px);
+    transform: translateY(-3px); /* Efecto "levantamiento" */
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4); /* Sombra al pasar el ratón */
 }
 
-.login-container .signup-link {
+.signup-link {
     margin-top: 25px;
-    font-size: 0.9em;
-    color: #ccc;
+    font-size: 1em;
+    color: #bdc3c7; /* Color más suave para el texto informativo */
+    line-height: 1.
+
 }
 
-.login-container .message {
-    margin-top: 20px;
-    padding: 10px 15px;
+/* Estilos para los mensajes */
+.message {
+    margin-top: 15px;
+    padding: 10px;
     border-radius: 8px;
-    border: 1px solid; 
-    font-size: 0.95em;
+    text-align: center;
     font-weight: bold;
-    display: none; 
+    font-size: 0.8em;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente para mensajes */
+    backdrop-filter: blur(3px); /* Desenfoque sutil */
+    -webkit-backdrop-filter: blur(3px);
+    border: 1px solid;
 }
 
-.login-container .message.success {
-    background-color: rgba(173, 140, 94, 0.2); 
-    color: #AD8C5E; 
-    border-color: #AD8C5E;
-    display: block; 
+.message.error {
+    color: #e74c3c; /* Rojo de error */
+    border-color: rgba(231, 76, 60, 0.5);
 }
 
-.login-container .message.error {
-    background-color: rgba(231, 76, 60, 0.2); 
-    color: #e74c3c; 
-    border-color: #e74c3c;
-    display: block; 
+.message.success {
+    color: #27ae60; /* Verde de éxito */
+    border-color: rgba(39, 174, 96, 0.5);
 }
+
+/* Puedes añadir estilos para el enlace si lo deseas, como: */
+.signup-link a {
+    color: #007bff; /* Azul del botón */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+
