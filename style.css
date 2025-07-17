@@ -49,6 +49,105 @@ header {
     box-shadow: 1px 1px 20px -5px #AD8C5E;
     margin-top: 0;
 }
+/* --- Estilos Generales para el Toggle del Menú --- */
+.menu-toggle {
+    display: none; /* Oculto por defecto en pantallas grandes */
+    cursor: pointer;
+    font-size: 2em; /* Tamaño del ícono */
+    color: white;   /* Color del ícono */
+    background: none; /* Sin fondo */
+    border: none;     /* Sin borde */
+    padding: 0;
+    z-index: 20; /* Asegura que esté por encima de otros elementos */
+}
+
+/* --- Estilos de la Navegación (nav ul) --- */
+/* Estilos por defecto para pantallas grandes (desktop) */
+.contenedor_nav .main-nav ul {
+    display: flex; /* Para que los ítems estén en fila en desktop */
+    justify-content: space-around; /* O como los tengas distribuidos */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* Otros estilos de tu menú de escritorio */
+}
+
+/* --- Media Query para Dispositivos Móviles (hasta 900px, o tu breakpoint deseado) --- */
+@media (max-width: 900px) { /* Puedes usar 768px si ese es tu principal breakpoint móvil */
+
+    /* Mostrar el botón de hamburguesa */
+    .menu-toggle {
+        display: block; /* Muestra el ícono de hamburguesa en móviles */
+        /* Puedes posicionarlo aquí si el contenedor_nav es relativo o flex */
+        position: absolute; /* Para que flote en el header */
+        top: 25px; /* Ajusta la posición vertical */
+        right: 20px; /* Ajusta la posición horizontal */
+    }
+
+    /* Asegura que el header sea el padre de referencia para el position: absolute del toggle */
+    header {
+        position: relative; /* O ya puede serlo por otros estilos */
+        /* Otros estilos que tengas para tu header */
+    }
+
+    /* Ocultar la lista de navegación por defecto en móviles */
+    .contenedor_nav .main-nav ul {
+        flex-direction: column; /* Apila los enlaces verticalmente */
+        position: absolute;     /* Posiciona la lista sobre el contenido */
+        top: 100px; /* Ajusta esto: debajo de tu header (ej. 100px de alto) */
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro semi-transparente para el menú abierto */
+        padding: 20px 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        
+        /* Ocultar el menú fuera de la pantalla (a la izquierda) */
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none; /* Deshabilita clics cuando está oculto */
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Animación de entrada/salida */
+        z-index: 15; /* Asegura que el menú esté sobre el contenido principal, pero debajo del toggle si lo necesitas */
+    }
+
+    /* Estilo para cuando el menú está ACTIVO (mostrándose) */
+    .contenedor_nav .main-nav ul.active {
+        transform: translateX(0); /* Lo devuelve a la vista */
+        opacity: 1; /* Lo hace visible */
+        pointer-events: auto; /* Habilita clics */
+    }
+
+    /* Estilos para cada ítem de la lista cuando el menú está en móvil */
+    .contenedor_nav .main-nav ul li {
+        text-align: center;
+        margin: 10px 0; /* Espacio vertical entre los ítems */
+    }
+    
+    .contenedor_nav .main-nav ul li a {
+        display: block; /* Para que el enlace ocupe todo el ancho del li */
+        padding: 10px 20px;
+        color: white; /* Color de los enlaces en el menú móvil */
+        font-size: 1.2em; /* Tamaño de fuente para móvil */
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+    }
+
+    .contenedor_nav .main-nav ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Efecto hover en móvil */
+    }
+
+    /* Ajustes para el .contenedor_nav si es un flex-container también */
+    .contenedor_nav {
+        /* Si tu .contenedor_nav es un flex container que envuelve el toggle y la nav,
+           aquí puedes organizar cómo se distribuyen en móvil. Por ejemplo: */
+        display: flex;
+        justify-content: flex-end; /* Alinea el toggle a la derecha */
+        width: 100%; /* O el ancho que necesites */
+    }
+}
+
+/* Puedes añadir más media queries para tamaños más pequeños (ej. 768px, 480px)
+   si necesitas ajustar aún más los tamaños de fuente o espaciado. */
+
 
 .container_info h1,
 .container_info h2 {
