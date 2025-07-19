@@ -213,32 +213,8 @@
         © 2025 Art & Coffee | Todos los derechos reservados
     </div>
 </footer> 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNavUl = document.querySelector('.contenedor_nav .main-nav ul'); // ¡Selector ajustado!
-    
 
-    if (menuToggle && mainNavUl) {
-        menuToggle.addEventListener('click', () => {
-            mainNavUl.classList.toggle('active');
-            // Opcional: Cambiar el ícono de hamburguesa a una 'X' al abrir
-            menuToggle.querySelector('i').classList.toggle('fa-bars');
-            menuToggle.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // Opcional: Cerrar el menú si se hace clic en un enlace
-        mainNavUl.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNavUl.classList.remove('active');
-                // Volver a cambiar el ícono a hamburguesa
-                menuToggle.querySelector('i').classList.remove('fa-times');
-                menuToggle.querySelector('i').classList.add('fa-bars');
-            });
-        });
-    }
-});
-</script>
+ 
         
         <script src="app.js"></script> 
         <script src="login.js"></script> 

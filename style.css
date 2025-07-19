@@ -74,33 +74,38 @@ header {
 
 /* --- Media Query para Dispositivos Móviles (hasta 900px, o tu breakpoint deseado) --- */
 @media (max-width: 900px) { /* Puedes usar 768px si ese es tu principal breakpoint móvil */
-
+ /* Reconfirmamos el z-index del HEADER, debe ser alto */
+    header {
+        z-index: 100; /* Asegura que el header mismo esté en una capa alta */
+        /* ... otros estilos ... */
+    }
     /* Mostrar el botón de hamburguesa */
     .menu-toggle {
         display: block; /* Muestra el ícono de hamburguesa en móviles */
         /* Puedes posicionarlo aquí si el contenedor_nav es relativo o flex */
+
         position: absolute; /* Para que flote en el header */
         top: 25px; /* Ajusta la posición vertical */
         right: 20px; /* Ajusta la posición horizontal */
+        z-index: 9999;
     }
 
     /* Asegura que el header sea el padre de referencia para el position: absolute del toggle */
-    header {
-        position: relative; /* O ya puede serlo por otros estilos */
-        /* Otros estilos que tengas para tu header */
-    }
+    
 
     /* Ocultar la lista de navegación por defecto en móviles */
     .contenedor_nav .main-nav ul {
         flex-direction: column; /* Apila los enlaces verticalmente */
         position: absolute;     /* Posiciona la lista sobre el contenido */
-        top: 100px; /* Ajusta esto: debajo de tu header (ej. 100px de alto) */
+         align-items: center;    
+        top: 0; /* Ajusta esto: debajo de tu header (ej. 100px de alto) */
         left: 0;
-        width: 100%;
+        width: 280px;
+        height: 100vh;
         background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro semi-transparente para el menú abierto */
         padding: 20px 0;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        
+        overflow-y: auto; 
         /* Ocultar el menú fuera de la pantalla (a la izquierda) */
         transform: translateX(-100%);
         opacity: 0;
@@ -110,7 +115,7 @@ header {
     }
 
     /* Estilo para cuando el menú está ACTIVO (mostrándose) */
-    .contenedor_nav .main-nav ul.active {
+    .contenedor_nav .main-nav ul.show-menu  {
         transform: translateX(0); /* Lo devuelve a la vista */
         opacity: 1; /* Lo hace visible */
         pointer-events: auto; /* Habilita clics */
